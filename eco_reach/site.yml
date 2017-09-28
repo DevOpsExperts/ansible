@@ -1,0 +1,17 @@
+---
+- name: Setup The Environment
+  hosts: "tag_Stack_{{ rgn }}_{{ env }}_{{ app }}"
+  become: True
+  gather_facts: False
+
+  vars_files:
+   - group_vars/all
+   - group_vars/ec2
+
+  tasks:
+   - include: setup/main.yml
+   - include: setup/dply.yml
+
+  handlers: 
+   - name: Restart Apache
+     service: name=httpd state=restarted

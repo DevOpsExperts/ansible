@@ -1,0 +1,16 @@
+---
+ - name: De-provisioning a set of instances
+   ec2:
+     key_name: "{{ ec2_key_name }}" 
+     group: "{{ ec2_group }}" 
+     instance_type: "{{ ec2_instance_type }}" 
+     image: "{{ ec2_image }}" 
+     wait: true
+     instance_tags: 
+       Stack: "{{ rgn }}-{{ env }}-{{ app }}"
+     exact_count: 0
+     count_tag: 
+       Stack: "{{ rgn }}-{{ env }}-{{ app }}"
+     region: "{{ ec2_region }}" 
+     zone: "{{ ec2_zone }}" 
+   register: ec2

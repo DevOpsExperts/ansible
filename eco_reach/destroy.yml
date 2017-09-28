@@ -1,0 +1,14 @@
+- name: Provision instances in AWS
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  # load AWS variables from this group vars file
+  vars_files:
+    - group_vars/all
+    - group_vars/ec2
+
+  # Provisioning Tasks 
+  tasks:
+   - include: deprovision/elb.yml
+   - include: deprovision/ec2.yml

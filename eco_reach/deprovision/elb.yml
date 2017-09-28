@@ -1,0 +1,25 @@
+---
+# - name: De provisioning ELB
+#    local_action:
+#    module: ec2_elb_lb
+#    name: "{{ rgn }}_{{ env }}_{{ app }}"
+#    state: absent
+#    wait: yes
+#    wait_timeout: 600
+
+ - name: Deleting ElB
+   local_action:
+     module: ec2_elb_lb
+     name: "{{ rgn }}-{{ env }}-{{ app }}"
+     state: absent
+     region: "{{ ec2_region }}"
+     zones:
+       - "{{ ec2_zone }}"
+     listeners:
+       - protocol: http
+         load_balancer_port: 80
+         instance_port: 80
+     tags:
+       Name: "{{ rgn }}-{{ env }}-{{ app }}"
+       Stack: "{{ rgn }}-{{ env }}-{{ app }}"
+

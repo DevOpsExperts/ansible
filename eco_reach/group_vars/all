@@ -1,0 +1,4 @@
+app: ECRH
+rgn: APAC
+env: Prod
+lcl: localhost
