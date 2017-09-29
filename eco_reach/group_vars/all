@@ -2,4 +2,4 @@ app: ECRH
 rgn: APAC
 env: Prod
 lcl: localhost
-repo: https://github.com/almasaeed2010/AdminLTE.git
+repo: https://github.com/itstayyab/AdminLTE.git
