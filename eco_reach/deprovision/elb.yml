@@ -1,12 +1,4 @@
 ---
-# - name: De provisioning ELB
-#    local_action:
-#    module: ec2_elb_lb
-#    name: "{{ rgn }}_{{ env }}_{{ app }}"
-#    state: absent
-#    wait: yes
-#    wait_timeout: 600
-
  - name: Deleting ElB
    local_action:
      module: ec2_elb_lb

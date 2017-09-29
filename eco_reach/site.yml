@@ -2,7 +2,7 @@
 - name: Deploy The Application
   hosts: "tag_Stack_{{ rgn }}_{{ env }}_{{ app }}"
   become: True
-#  gather_facts: False
+  # gather_facts: False
 
   vars_files:
    - group_vars/all

@@ -3,7 +3,3 @@
    git:
     repo: "{{ repo }}"
     dest: /var/www/html2
-
-#   template: src=templates/index.html dest=/var/www/html/index.html
-#   notify: 
-#   - Restart Apache
