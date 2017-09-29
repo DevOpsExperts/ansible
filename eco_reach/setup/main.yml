@@ -5,10 +5,40 @@
     - httpd
     - git
 
- - name: enable service httpd
-   service: name=httpd state=started enabled=yes
+ - name: Updating Apache config
+   template:
+    src: templates/httpd.conf
+    dest: /etc/httpd/conf/httpd.conf
+    owner: root
+    group: root
+    mode: 644
+    force: yes
 
-# - name: wait for the servers to appear on the network
-#   wait_for: host={{ item.public_dns_name }} port=80 delay=10 timeout=180 state=started
-#   with_items: "{{ ec2.tagged_instances }}"
+ - name: Creating docroot
+   file:
+    path: /var/www/html2
+    state: directory
+    mode: 0755
+
+ - name: enable service httpd
+   service: name={{ item }} state=started enabled=yes
+   with_items:
+    - httpd
+
+ - name: Ec2 facts
+   ec2_remote_facts:
+     aws_access_key: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
+     aws_secret_key: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
+     region: "{{ ec2_region }}"
+     filters:
+      instance-state-name: running
+      'tag:Stack': "{{ rgn }}-{{ env }}-{{ app }}" 
+   register: ec2_info
+
+# - debug: msg={{ item.private_ip_address }}
+#   with_items: "{{ ec2_info.instances }}"
+
+ - name: wait for the servers to appear on the network
+   wait_for: host={{ item.private_ip_address }} port=80 delay=3 timeout=180 state=started
+   with_items: "{{ ec2_info.instances }}"
 

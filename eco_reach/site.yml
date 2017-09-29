@@ -1,8 +1,8 @@
 ---
-- name: Setup The Environment
+- name: Deploy The Application
   hosts: "tag_Stack_{{ rgn }}_{{ env }}_{{ app }}"
   become: True
-  gather_facts: False
+#  gather_facts: False
 
   vars_files:
    - group_vars/all
@@ -10,8 +10,22 @@
 
   tasks:
    - include: setup/main.yml
-   - include: setup/dply.yml
+   - include: setup/git.yml
 
   handlers: 
    - name: Restart Apache
      service: name=httpd state=restarted
+
+- name: Load Balancer Tasks
+  hosts: "{{ lcl }}"
+  connection: local
+  gather_facts: False
+
+  # AWS variables from this group vars file
+  vars_files:
+    - group_vars/all
+    - group_vars/ec2
+
+  # Update in Load balancer
+  tasks:
+   - include: setup/elb.yml
