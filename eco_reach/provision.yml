@@ -3,12 +3,10 @@
   connection: local
   gather_facts: False
 
-  # AWS variables from this group vars file
   vars_files:
     - group_vars/all
     - group_vars/ec2
 
-  # Provisioning Tasks 
   tasks:
    - include: provision/ec2.yml
    - include: provision/elb.yml

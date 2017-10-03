@@ -2,8 +2,6 @@
  - name: Ec2 facts
    local_action: 
      module: ec2_remote_facts
-     #aws_access_key: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
-     #aws_secret_key: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
      region: "{{ ec2_region }}"
      filters:
       instance-state-name: running

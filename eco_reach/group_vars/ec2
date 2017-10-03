@@ -1,7 +1,8 @@
-ec2_exact_count: 1
+ec2_exact_count: 2
 ec2_key_name: tayyab-sg
 ec2_image: ami-77af2014
 ec2_zone: ap-southeast-1b
 ec2_region: ap-southeast-1
-ec2_instance_type: t2.nano
+ec2_instance_type: t2.micro
 ec2_group:
+ec2_timeout: 360
