@@ -4,9 +4,8 @@
   gather_facts: False
 
   vars_files:
-    - group_vars/all
-    - group_vars/ec2
+   - group_vars/all
+   - group_vars/ec2
 
   tasks:
-   - include: provision/ec2.yml
-   - include: provision/elb.yml
+   - include: elb.yml

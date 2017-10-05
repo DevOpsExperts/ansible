@@ -16,3 +16,15 @@
      state: present
      region: "{{ ec2_region }}"
    with_items: "{{ ec2_info.instances }}"
+   #register: elb_info
+
+ - local_action:
+     module: ec2_elb_facts
+     region: "{{ ec2_region }}"
+   register: elb_facts
+
+ - name: ELB name
+   command: echo "{{ item.dns_name }}"
+   with_items: "{{ elb_facts.elbs }}"
+   when:  item.tags.Stack == "{{ rgn }}-{{ env }}-{{ app }}"
+

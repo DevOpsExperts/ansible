@@ -1,5 +1,13 @@
 ---
  - name: Deploying Code from Git
    git:
-    repo: "{{ repo }}"
-    dest: /var/www/html2
+     repo: https://github.com/itstayyab/AdminLTE.git
+     dest: /var/www/html2
+   when: app == "ALTE"
+
+ - name: Deploying Code from Git
+   git:
+     repo: https://github.com/Meggin/Bootstrap-Portfolio.git
+     dest: /var/www/html2
+   when: app == "BTP"
+

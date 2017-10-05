@@ -1,5 +1,4 @@
-app: ECRH
 rgn: APAC
-env: Prod
+env: SIT
+app: BTP
 lcl: localhost
-repo: https://github.com/itstayyab/AdminLTE.git
